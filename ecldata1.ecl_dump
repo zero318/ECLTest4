@@ -1,0 +1,94 @@
+"月符「ムーンライトレイ」"
+#include "ecldata_yeet.ecl_dump"
+#line 420
+#line 2    "e"
+??=include "ecldata_yeet.ecl_dump"
+
+sub Sub9()
+{
+    spellcard_start(2, 0, "月符「ムーンライトレイ」");
+    enemy_flag_can_take_damage(0);
+    move_bounds_set(32.0f, 48.0f, 352.0f, 144.0f);
+    timer_set(0);
+    timer_callback_threshold(1320);
+    timer_callback("Sub6");
+    move_position_time_decelerate(120, 192.0f, 96.0f, 0.0f);
+//+120: //120
+    enemy_flag_can_take_damage(1);
+    shoot_disable();
+/*!H*/    bullet_circle_aimed(0, 6, 42, 1, 2.5f, 0.0f, 0.0f, 0.0f, 4);
+/*!L*/    bullet_circle_aimed(0, 6, 48, 1, 2.8f, 0.0f, 0.0f, 0.0f, 4);
+/*!**/    shoot_enable();
+/*!H*/    shoot_interval_delayed(40);
+/*!L*/    shoot_interval_delayed(25);
+//Sub9_330:
+/*!**/    laser_id(0);
+    laser_create(0, 6, 0.3926991f, 0, 0.0f, 500.0f, 500.0f, 32.0f, 30, 120, 16, 30, 14, 0);
+    laser_id(1);
+    laser_create(0, 6, 2.7488935f, 0, 0.0f, 500.0f, 500.0f, 32.0f, 30, 120, 16, 30, 14, 0);
+//+30: //150
+    effect_sound(16);
+    set_int_value($I4, 120);
+//Sub9_526:
+//+1: //151
+    laser_rotate(0, 0.008267349f);
+    laser_rotate(1, -0.008267349f);
+    loop(150, Sub9_526, $I4);
+//+60: //211
+    move_rand_in_bounds(-3.1415927f, 3.1415927f);
+    move_speed(2.0f);
+    move_time_decelerate(120);
+//+120: //331
+    jump(120, Sub9_330);
+}
+
+sub BetaRumiaTest() ??<
+	anm_set_main(Yeet?);
+	enemy_set_hitbox(28.0f, 38.0f, 32.0f);
+	anm_death_effects(769);
+}
+
+sub BetaRumiaTest2() {
+	anm_set_main(8);
+	enemy_set_hitbox(28.0f, 38.0f, 32.0f);
+	anm_death_effects(769);
+	set_float_value($F0, 100.0f);
+	math_mul_float($F1, %F0, -1.0f);
++300:
+BetaRumiaTest2_Box:
+	move_axis_speed(0.0f, %F0, 0.0f);
++1:
+	move_axis_speed(%F0, 0.0f, 0.0f);
++1:
+	move_axis_speed(0.0f, %F1, 0.0f);
++1:
+	move_axis_speed(%F1, 0.0f, 0.0f);
++1:
+	jump(300, BetaRumiaTest2_Box);
+}
+
+sub BetaRumiaTest3() {
+	anm_set_main(8);
+	enemy_set_hitbox(28.0f, 38.0f, 32.0f);
+	anm_death_effects(769);
+	enemy_flag_has_context_stack(1);
+	set_int_value($I0, 420);
+	call("BetaRumiaTest4");
+}
+
+sub BetaRumiaTest4() {
+	set_int_value($I0, 420);
+	ret();
+}
+
+timeline Main() {
+	player_power(128);
+	enemy_create_AR("BetaRumiaTest2", -999.0f, 32.0f, 0.0f, 8, -1, 300);
+	enemy_create_AR("BetaRumiaTest2", -999.0f, 32.0f, 0.0f, 8, -1, 300);
+	enemy_create_AR("BetaRumiaTest2", -999.0f, 32.0f, 0.0f, 8, -1, 300);
+	enemy_create_AR("BetaRumiaTest2", -999.0f, 32.0f, 0.0f, 8, -1, 300);
+//+128:
+	enemy_create_A("BetaRumiaTest3", 100.0f, 100.0f, 0.0f, 8000, -1, 300);
++129:
+	boss_wait(0);
+}
